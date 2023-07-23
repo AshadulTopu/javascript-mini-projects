@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>sticky menu </title>
+    <style>
+        body {
+            text-align: center;
+            margin: 0 auto;
+        }
+
+        .container {
+            margin: auto;
+            background: #ccc;
+            /* max-width: 800px; */
+            height: 600px;
+        }
+
+        p {
+            font-size: 20px;
+            padding: 20px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 20px;
+            border-radius: 50%;
+            border: 5px solid #ccc;
+            cursor: pointer;
+        }
+
+        .black {
+            background: #000;
+        }
+
+        .white {
+            background: #fff;
+        }
+
+        .red {
+            background: #ff0000;
+        }
+
+        .yellow {
+            background: #ffff00;
+        }
+
+        nav ul{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+            list-style: none;
+            padding: 10px;
+            background: purple;
+            color: #fff;
+            font-size: 20px;
+        }
+        .sticky{
+            position: fixed;
+            top: 0;
+            width: 100%;
+        }
+        .logo h1{
+            font-size: 120px;
+            text-transform: uppercase;
+            margin: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="logo">
+        <h1>your logo</h1>
+    </div>
+    <nav>
+        <ul class="menu">
+            <li>home</li>
+            <li>About</li>
+            <li>shop</li>
+            <li>team</li>
+            <li>client</li>
+        </ul>
+    </nav>
+    <h1>sticky menu</h1>
+
+    <div class="container"></div>
+    <div class="container black"></div>
+    <div class="container red"></div>
+    <div class="container white"></div>
+    <div class="container yellow"></div>
+    <div class="container black"></div>
+
+    <script>
+        window.addEventListener('scroll', function(){
+            if(window.pageYOffset >= 138){ // 138 is logo section height
+                document.getElementsByClassName('menu')[0].classList.add('sticky')
+            }else{
+                document.getElementsByClassName('menu')[0].classList.remove('sticky')
+            }
+        })
+    </script>
+
+            <!-- what I learn here: 
+    
+        1. here I learn how to create sticky menu bar using html
+        2. how to how to and when use window and pageYOffset
+    -->
+</body>
+
+</html>

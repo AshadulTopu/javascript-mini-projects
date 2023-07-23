@@ -53,16 +53,28 @@
         <span class="btn red" onclick="changeBg('#ff0000')"></span>
         <span class="btn yellow" onclick="changeBg('#ffff00')"></span>
     </div>
-    <h1>background color changer</h1>
+    <h1 class="text">background color changer</h1>
     <div class="container">
-        <p>
+        <p class="text">
             Lorem ipsum, dolor sit amet consectetur adipisicing elit. Rerum magni repellat rem illum praesentium, nam aperiam. Odit excepturi labore minima totam? Voluptatibus voluptatem ipsum expedita quisquam maiores debitis, ducimus hic eligendi itaque dolorum ipsam quasi aliquam quia magni amet consectetur. Adipisci minus consequatur quos iure magnam dolores eius dolor beatae earum, similique accusamus hic aspernatur consequuntur necessitatibus ut sint optio repellat accusantium repudiandae velit distinctio sequi saepe! Modi, ipsa quaerat molestias nulla quam consequatur necessitatibus veniam, corrupti cumque dicta inventore dignissimos, et rerum vitae repellat sed quibusdam qui at aliquam quae reiciendis. Ab est vitae eligendi saepe commodi eveniet minima.
         </p>
     </div>
     
     <script>
+        let text = document.querySelectorAll('.text')
         function changeBg(color){
             document.querySelector('body').style.backgroundColor = color;
+
+            // change text color 
+            if(color == '#000'){
+                for(let item of text){
+                    item.style.color = '#fff';
+                }
+            }else{
+                for(let item of text){
+                    item.style.color = '#000';
+                }
+            }
         }
     </script>
 
@@ -71,6 +83,7 @@
         1. here I learn how to create onclick function in html
         2. how to how to pass and receive parameter in onclick function
         3. how to change css property value using javascript
+        4. how to use for of loop.
     -->
 </body>
 </html>
