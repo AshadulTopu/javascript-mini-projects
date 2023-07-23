@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>background changer </title>
+    <style>
+         body{
+            text-align: center;
+            margin: auto;
+        }
+        .container{
+            background: #ccc;
+            margin: auto;
+            max-width: 800px;
+        }
+
+        p{
+            font-size: 20px;
+            padding: 20px;
+        }
+        .color-block{
+            text-align: center;
+            padding: 30px;
+        }
+        .btn{
+            display: inline-block;
+            min-width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            border: 5px solid #ccc;
+            cursor: pointer;
+        }
+        .black{
+            background: #000;
+        }
+        .white{
+            background: #fff;
+        }
+        .red{
+            background: #ff0000;
+        }
+        .yellow{
+            background: #ffff00;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="color-block">
+        <span class="btn black" onclick="changeBg('#000')"></span>
+        <span class="btn white" onclick="changeBg('#fff')"></span>
+        <span class="btn red" onclick="changeBg('#ff0000')"></span>
+        <span class="btn yellow" onclick="changeBg('#ffff00')"></span>
+    </div>
+    <h1>background color changer</h1>
+    <div class="container">
+        <p>
+            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Rerum magni repellat rem illum praesentium, nam aperiam. Odit excepturi labore minima totam? Voluptatibus voluptatem ipsum expedita quisquam maiores debitis, ducimus hic eligendi itaque dolorum ipsam quasi aliquam quia magni amet consectetur. Adipisci minus consequatur quos iure magnam dolores eius dolor beatae earum, similique accusamus hic aspernatur consequuntur necessitatibus ut sint optio repellat accusantium repudiandae velit distinctio sequi saepe! Modi, ipsa quaerat molestias nulla quam consequatur necessitatibus veniam, corrupti cumque dicta inventore dignissimos, et rerum vitae repellat sed quibusdam qui at aliquam quae reiciendis. Ab est vitae eligendi saepe commodi eveniet minima.
+        </p>
+    </div>
+    
+    <script>
+        function changeBg(color){
+            document.querySelector('body').style.backgroundColor = color;
+        }
+    </script>
+
+        <!-- what I learn here: 
+    
+        1. here I learn how to create onclick function in html
+        2. how to how to pass and receive parameter in onclick function
+        3. how to change css property value using javascript
+    -->
+</body>
+</html>
