@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Temperature Converter </title>
+    <style>
+        body{
+            text-align: center;
+            margin: auto;
+        }
+        .container{
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 500px;
+            height: 200px;
+            background: #ccc;
+            margin: auto;
+        }
+        input{
+            width: 200px;
+            height: 40px;
+            font-size: 20px;
+        }
+        label{
+            font-size: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Temperature Converter</h1>
+    <div class="container">
+        <div class="">
+            <label>celsius</label>
+            <input type="number" value="0" id="cel">
+        </div>
+        <div class="">
+            <label>Fahrenheit</label>
+            <input type="number" value="32" id="fah">
+        </div>
+    </div>
+
+    <script>
+        let cel = document.getElementById('cel')
+        let fah = document.getElementById('fah')
+
+        cel.addEventListener('input', function(){
+            let c = this.value
+            let f = (c * 9/5) + 32
+            if(!Number.isInteger(f)){ 
+                f = f.toFixed(4) // control decimal number after point
+            }
+            fah.value = f;
+        })
+        fah.addEventListener('input', function(){
+            let f = this.value 
+            let c = (f - 32) * 5/9
+            if(!Number.isInteger(c)){ 
+                 c = c.toFixed(4) // control decimal number after point
+            }
+            cel.value = c
+        })
+    </script>
+
+    <!-- what I learn here: 
+    
+        1. here I learn how to check number is integer  or not integer.
+        2. how to fixed number limit after decimal number pointer.
+        3. input eventListener, input event work like keyUp, keyDown event.
+    -->
+</body>
+</html>

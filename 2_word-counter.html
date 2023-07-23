@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>word counter</title>
+    <style>
+         body{
+            text-align: center;
+            margin: auto;
+        }
+        .container{
+            background: #ccc;
+            margin: auto;
+        }
+        textarea{
+            width: 100%;
+            height: 100%;
+            padding: 30px;
+            font-size: 20px;
+        }
+        p{
+            font-size: 20px;
+            padding: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>word and character counter</h1>
+    <div class="container">
+        <textarea id="textbox" cols="30" rows="10"></textarea>
+
+        <p>
+            <span id="word">0</span> words and 
+            <span id="char">0</span> characters
+        </p>
+    </div>
+    
+    <script>
+        let textBox  = document.getElementById('textbox')
+        let showChar = document.getElementById('char')
+        let showWord = document.getElementById('word')
+        textBox.addEventListener('input', function(){
+            let text = this.value 
+            // console.log(text);
+            let char = text.length // find characters
+            showChar.innerHTML = char; // show characters
+
+            text = text.trim(); // remove white space from string outside
+            let word = text.split(" ") // find word
+            let cleanWord = word.filter(function(data){
+                return data != ''; // remove white space from string inside
+            })
+            // console.log(cleanWord );
+            showWord.innerHTML = cleanWord .length
+        })
+    </script>
+</body>
+</html>
