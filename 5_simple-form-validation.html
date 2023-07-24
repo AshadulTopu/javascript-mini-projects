@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>simple form validation </title>
+    <style>
+        body{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            height: 100vh;
+        }
+        input{
+            display: block;
+            width: 300px;
+            padding: 10px;
+            margin: 20px 0;
+        }
+        .error{
+            color: red;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Login form validation</h1>
+        <form action="#" onsubmit="return validateForm()">
+            <input type="text" id="user-name" placeholder="enter your name ">
+            <span id="user-error" class="error"></span>
+            <input type="password" id="password" placeholder="enter your password">
+            <span id="pass-error" class="error"></span>
+            <input type="submit">
+        </form>
+    </div>
+    
+    <script>
+        let userName = document.getElementById('user-name')
+        let password = document.getElementById('password')
+        let userError = document.getElementById('user-error')
+        let passError = document.getElementById('pass-error')
+
+        let flag = 1
+
+        function validateForm(){
+            if (userName.value == '') {
+                // console.log('error');
+                userError.innerHTML = 'user name required'
+                flag = 0
+            }else if(userName.value.length < 3){
+                userError.innerHTML = 'user name required minimum 3 characters'
+                flag = 0
+            }else{
+                userError.innerHTML = ''
+                flag = 1
+            }
+
+            if(password.value == ''){
+                passError.innerHTML = 'Password is empty'
+                flag = 0
+            }else{
+                passError.innerHTML = ''
+                flag = 1
+            }
+
+            if (flag) {
+                console.log('flag true');
+                return true;
+            }else{
+                console.log('flag false');
+                return false
+            }
+            return true
+        }
+
+
+
+    </script>
+</body>
+</html>
