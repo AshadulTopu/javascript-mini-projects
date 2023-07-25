@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>stop watch</title>
+    <style>
+        body{
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #dfc1b0;
+        }
+        .time{
+            font-size: 80px;
+            font-weight: 700;
+            color: #fff;
+        }
+        button{
+            font-size: 30px;
+            padding: 10px;
+            margin: 20px;
+            border: none;
+            cursor: pointer;
+        }
+        .start{
+            background: green;
+        }
+        .stop{
+            background: yellow;
+        }
+        .reset{
+            background: red;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="time">
+            <span class="hours">00</span> :
+            <span class="min">00</span> :
+            <span class="sec">00</span> :
+            <span class="milisec">00</span>
+        </div>
+        <div class="button">
+            <button class="start" onclick="start()">start</button>
+            <button class="stop" onclick="stop()">Stop</button>
+            <button class="reset" onclick="reset()">Reset</button>
+        </div>
+    </div>
+    
+    <script>
+
+        let hr = 0
+        let min = 0
+        let sec = 0
+        let milisec = 0
+        let timer = false
+
+
+        function start(){
+            timer = true
+            stopWatch()
+        }
+
+        function stop(){
+            timer = false
+        }
+        function reset(){
+            timer = false
+            document.getElementsByClassName('milisec')[0].innerHTML = '00'
+            document.getElementsByClassName('sec')[0].innerHTML = '00'
+            document.getElementsByClassName('min')[0].innerHTML = '00'
+            document.getElementsByClassName('hours')[0].innerHTML = '00'
+        }
+        function stopWatch(){
+            if( timer == true){
+                milisec = milisec+1
+
+                if(milisec == 99){
+                    sec = sec+1
+                    milisec = 0
+                }
+                if(sec == 59){
+                    min = min+1
+                    sec = 0
+                }
+                if(min == 59){
+                    hr = hr+1
+                    min = 0
+                }
+
+                // 0 for make double digit
+                let milisecString = milisec
+                let secString = sec
+                let minString =  min
+                let hrString = hr
+
+                if(milisec < 10){
+                    milisecString = '0' +milisecString
+                }
+
+                if(sec < 10){
+                    secString = '0' +secString
+                }
+
+                if(min < 10){
+                    minString = '0' +minString
+                }
+
+                if(hr < 10){
+                    hrString = '0' +hrString
+                }
+
+                document.getElementsByClassName('milisec')[0].innerHTML = milisecString
+                document.getElementsByClassName('sec')[0].innerHTML = secString
+                document.getElementsByClassName('min')[0].innerHTML = minString
+                document.getElementsByClassName('hours')[0].innerHTML = hrString
+
+                // without checking double digit
+                // document.getElementsByClassName('milisec')[0].innerHTML = milisec
+                // document.getElementsByClassName('sec')[0].innerHTML = sec
+                // document.getElementsByClassName('min')[0].innerHTML = min
+                // document.getElementsByClassName('hours')[0].innerHTML = hr
+
+                setTimeout('stopWatch()',10)
+            }
+        }
+    </script>
+</body>
+</html>
