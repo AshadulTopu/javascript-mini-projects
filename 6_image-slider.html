@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>image slider </title>
+    <style>
+        body{
+            margin: 0;
+        }
+        img{
+            width: 1900px;
+            height: 700px;
+        }
+        .container{
+            width: 100%;
+            position: relative;
+        }
+        .arrow{
+            position: absolute;
+            top: 45%;
+            color: #000;
+            background: #ffffff9f;
+            padding: 10px 20px;
+            cursor: pointer;
+            font-size: 25px;
+        }
+        .prev{
+            left: 0;
+        }
+        .next{
+            right: 1%;
+        }
+        .caption{
+            font-size: 24px;
+            text-align: center;
+            background: #2a0061c9;
+            padding: 10px 0;
+            color: #fff;
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+        }
+        .slide{
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+
+        <div class="slide">
+            <img src="img/1.jpg" alt="">
+            <p class="caption">Caption 1</p>
+        </div>
+        <div class="slide">
+            <img src="img/2.jpeg" alt="">
+            <p class="caption">Caption 2</p>
+        </div>
+        <div class="slide">
+            <img src="img/3.jpeg" alt="">
+            <p class="caption">Caption 3</p>
+        </div>
+        <div class="slide">
+            <img src="img/4.jpeg" alt="">
+            <p class="caption">Caption 4</p>
+        </div>
+
+        <span class="arrow prev" onclick="controller(-1)">&#10094;</span>
+        <span class="arrow next" onclick="controller(1)">&#10095;</span>
+    </div>
+
+    <script>
+        let flag = 1
+        function controller(x){
+            flag +=x
+            slideShow(flag)
+        }
+        slideShow(flag)
+        function slideShow(num){
+            let slides = document.getElementsByClassName('slide')
+            if(num == slides.length){
+                flag =0
+                num = 0
+            }
+            if(num < 0){
+                flag = slides.length -1
+                num = slides.length -1
+            }
+
+            for(let y of slides){
+                y.style.display = "none"
+            }
+
+            slides[num].style.display = 'block'
+        }
+    </script>
+</body>
+</html>
