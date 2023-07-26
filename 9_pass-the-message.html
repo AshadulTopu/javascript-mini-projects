@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Random quote generator</title>
+    <style>
+        body{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            height: 100vh;
+            background: slategray;
+        }
+        .container{
+            padding: 30px;
+            background: thistle;
+            border-radius: 10px;
+            text-align: center;
+        }
+        button{
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 20px;
+            margin-top: 30px;
+        }
+        input{
+            padding: 10px;
+            width: 300px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <form action="#">
+            <input type="text" id="inputMsg" placeholder="your message">
+        </form>
+        <p id="showMsg"></p>
+        <button onclick="getMsg()">submit</button>
+    </div>
+
+    <script>
+       let inputtedMsg =  document.getElementById('inputMsg')
+
+       function getMsg(){
+        document.getElementById('showMsg').innerHTML = inputtedMsg.value
+        inputtedMsg.value = ''
+       }
+
+       // adding enter key activity
+       inputtedMsg.addEventListener('keydown', function(event){
+        if(event.key == 'Enter'){
+            getMsg()
+        }
+       })
+    </script>
+    
+</body>
+</html>
