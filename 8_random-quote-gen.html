@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Random quote generator</title>
+    <style>
+        body{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            height: 100vh;
+            background: slategray;
+        }
+        .container{
+            padding: 30px;
+            background: thistle;
+            border-radius: 10px;
+            text-align: center;
+        }
+        button{
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 20px;
+            margin-top: 30px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="quotes">
+            <p id="quote">Hello world</p>
+            <h3 id="author">Topu</h3>
+        </div>
+
+        <button onclick="generateQuote()">Generate Quote</button>
+    </div>
+
+    <script>
+        function generateQuote(){
+            let quotes = {
+                "Zhuangzi" : '"Life comes from the earth and life returns to the earth."',
+                "William Osler" : '"We are here to add what we can to life, not to get what we can from life."',
+                "William Hazlitt" : '"The art of life is to know how to enjoy a little and to endure very much."',
+                "Wayne Dyer" : '"If you change the way you look at things, the things you look at change."',
+                "Vincent Van Gogh" : '"For the great doesn\'t happen through impulse alone, and is a succession of little things that are brought together."'
+            }
+
+            let authors = Object.keys(quotes)
+            // console.log(authors);
+            let author = authors[Math.floor(Math.random() * authors.length)]
+            // console.log(author);
+            let quote = quotes[author]
+            document.getElementById('author').innerHTML = author
+            document.getElementById('quote').innerHTML = quote
+        }
+    </script>
+    
+</body>
+</html>
