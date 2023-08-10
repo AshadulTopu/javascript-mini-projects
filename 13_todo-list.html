@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todo list</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+        integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        @font-face {
+            font-family: "mumblers";
+            src: url("mumblers/mumblersDemoRegular.ttf")
+        }
+
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            font-family: 'mumblers';
+        }
+
+        .container {
+            background: powderblue;
+            /* width: 50%;
+            height: 50%; */
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        div {
+            margin: 20px auto;
+        }
+
+        .input-box {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        i{
+            color: orange;
+        }
+        input {
+            padding: 15px 10px;
+            width: 300px;
+            border: 0;
+            outline: 0;
+            background: inherit;
+            border-bottom: 2px solid #000;
+            border-radius: 10px;
+            font-family: inherit;
+            font-size: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="todo-body">
+            <h1>Todo List</h1>
+            <div class="input-box">
+                <i class="fa-solid fa-pencil fa-2xl" id="pencil"></i>
+                <input type="text" id="userInput" placeholder="Enter todo list">
+            </div>
+            <div class="output-box" id="output">
+
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let inputList = document.getElementById('userInput')
+        let pencil = document.getElementById('pencil')
+        let outputBox = document.getElementById('output')
+        pencil.addEventListener('click', function(){
+            outputBox.innerHTML = ''
+        })
+        function addItem(){
+            // outputBox.
+            var h2 = document.createElement('h2')
+            h2.innerHTML ='_ '+ inputList.value
+
+            h2.addEventListener('click', function(){
+                h2.style.textDecoration = 'line-through'
+            })
+            outputBox.insertAdjacentElement('beforeend', h2)
+            inputList.value = ''
+        }
+        inputList.addEventListener('keydown', function(e){
+            if(e.key == 'Enter'){
+                addItem()
+            }
+        })
+    </script>
+</body>
+
+</html>

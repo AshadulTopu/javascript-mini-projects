@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tips calculator</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+        integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        @font-face {
+            font-family: "mumblers";
+            src: url("mumblers/mumblersDemoRegular.ttf")
+        }
+
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            font-family: 'mumblers';
+        }
+
+        .container {
+            background: powderblue;
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        div {
+            margin: 20px auto;
+        }
+
+        input {
+            padding: 15px 10px;
+            width: 300px;
+            border: 0;
+            outline: 0;
+            background: inherit;
+            border-bottom: 2px solid #000;
+            border-radius: 10px;
+            font-family: inherit;
+            font-size: 20px;
+        }
+        label{
+            font-size: 20px;
+        }
+        select{
+            font-size: 20px;
+            padding: 10px;
+            border-radius: 10px;
+            background: inherit;
+            border: 0;
+            outline: 0;
+            font-family: inherit;
+        }
+        option{
+            background: powderblue;
+            color: blueviolet;
+        }
+        button{
+            width: 100%;
+            padding: 10px;
+            background: inherit;
+            font-size: 20px;
+            text-transform: capitalize;
+            color: white;
+            font-weight: 600;
+            border-color: aliceblue;
+        }
+        .output-box{
+            visibility: hidden;
+            text-align: center;
+            font-size: 20px;
+            position: fixed;
+            bottom: 30px;
+            margin: auto;
+            width: 300px;
+            background: powderblue;
+            border-radius: 5px;
+        }
+        .show{
+            visibility: visible;
+            animation: fadeIn .5s, fadeOut .5s;
+        }
+        @keyframes fadeIn {
+            from{
+                bottom: 0;
+                opacity: 0;
+            }
+            to{
+                bottom: 30px;
+                opacity: 1;
+            }
+        }
+        @keyframes fadeOut {
+            to{
+                bottom: 30px;
+                opacity: 1;
+            }
+            from{
+                bottom: 0;
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="calculator">
+            <h1>Tips calculator</h1>
+                <div class="">
+                    <i class="fa-solid fa-dollar-sign fa-2xl"></i>
+                    <input type="number" id="billInput" placeholder="Enter bill amount">
+                </div>
+
+                <div class="">
+                    <i class="fa-solid fa-person fa-2xl"></i>
+                    <input type="number" id="guestInput" placeholder="Enter guest number">
+                </div>
+
+                <div class="">
+                    <label for="quality"> service Quality</label>
+                    <select id="quality">
+                        <option value="0" disabled selected>Choose......</option>
+                        <option value="0.3">30% - Outstanding</option>
+                        <option value="0.2">20% - Good</option>
+                        <option value="0.15">15% - It was ok</option>
+                        <option value="0.1">10% - Bad</option>
+                        <option value="0.05">05% - Terrible</option>
+                    </select>
+                </div>
+                <button onclick="calculateTips()">calculate</button>
+
+            <div class="output-box" id="output"></div>
+        </div>
+    </div>
+
+    <script>
+        const amount = document.getElementById('billInput')
+        const guests = document.getElementById('guestInput')
+        const rating = document.getElementById('quality')
+        const showTip = document.getElementById('output')
+
+        calculateTips = () =>{
+            // calculate tip
+            // per guest given tip
+            const tip = ((amount.value * rating.value) / (guests.value)).toFixed(2)
+            amount.value = ''
+            guests.value = ''
+            rating.value = ''
+            // console.log(tip);
+            if(tip === 'NaN'){
+                showTip.innerHTML = 'Tip $0 each'
+                showTipAmount()
+            }else{
+                showTip.innerHTML = `Tip $ ${tip} each`
+                showTipAmount()
+            }
+        }
+
+         showTipAmount = () => {
+            var x = showTip // getting showTip class
+            x.classList.add('show')
+            setTimeout(()=>{
+                x.classList.remove('show')
+            }, 5000)
+         }
+    </script>
+</body>
+
+</html>

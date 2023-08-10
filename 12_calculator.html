@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator</title>
+    <style>
+        body{
+            box-sizing: border-box;
+        }
+        .container{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        }
+        .calculator-body{
+            width: 320px;
+            margin: auto;
+            padding: 15px;
+            border-radius: 15px;
+            background: slateblue;
+            text-align: center;
+        }
+        input{
+            max-width:300px;
+            width: 100%;
+            padding: 15px 10px;
+            border-radius: 10px;
+            border: none;
+            outline: none;
+            margin-bottom: 20px;
+            font-size: 20px;
+            text-align: right;
+            direction: ltr;
+        }
+        button{
+            padding: 10px 20px;
+            margin: 10px;
+            background: darkviolet;
+            border-color: white ;
+            font-size: 20px;
+        }
+        .equal{
+            width: 90%;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="calculator-body">
+            <input type="text" id="userInput" placeholder="0">
+            <br>
+            <button class="btn" onclick="presskey(1)">1</button>
+            <button class="btn" onclick="presskey(2)">2</button>
+            <button class="btn" onclick="presskey(3)">3</button>
+            <button class="btn" onclick="presskey('+')">+</button>
+            <br>
+            <button class="btn" onclick="presskey(4)">4</button>
+            <button class="btn" onclick="presskey(5)">5</button>
+            <button class="btn" onclick="presskey(6)">6</button>
+            <button class="btn" onclick="presskey('-')">-</button>
+            <br>
+            <button class="btn" onclick="presskey(7)">7</button>
+            <button class="btn" onclick="presskey(8)">8</button>
+            <button class="btn" onclick="presskey(9)">9</button>
+            <button class="btn" onclick="presskey('*')">x</button>
+            <br>
+            <button class="btn" onclick="presskey('.')">.</button>
+            <button class="btn" onclick="presskey(0)">0</button>
+            <button class="btn" onclick="clearData()"> c </button>
+            <button class="btn" onclick="presskey('/')">/</button>
+            <br>
+            <button class="btn equal" onclick="equal()"> = </button>
+        </div>
+    </div>
+
+    <script>
+        const userInput = document.getElementById('userInput')
+        let expression = ''
+
+        function presskey(x){
+            expression += x
+            userInput.value = expression
+        }
+        function equal(){
+            userInput.value = eval(expression)
+            expression = ''
+        }
+        function clearData(){
+            // console.log('clear function has clicked');
+            expression = ''
+            userInput.value = expression
+        }
+    </script>
+</body>
+</html>
