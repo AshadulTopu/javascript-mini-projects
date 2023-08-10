@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flash card</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+        integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        /* @font-face {
+            font-family: "mumblers";
+            src: url("mumblers/mumblersDemoRegular.ttf")
+        } */
+
+        body {
+            /* display: flex; */
+            /* align-items: center; */
+            /* justify-content: center; */
+            height: 100vh;
+            font-family: 'mumblers';
+        }
+
+        .container {
+            background: powderblue;
+            padding: 10px;
+            border-radius: 10px;
+            max-width: 320px;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        div {
+            margin: 10px auto;
+        }
+
+        textarea {
+            padding: 0px 10px;
+            width: 300px;
+            border: 0;
+            outline: 0;
+            background: inherit;
+            border-bottom: 2px solid #000;
+            border-radius: 10px;
+            font-family: inherit;
+            font-size: 18px;
+        }
+
+        ::placeholder {
+            color: #000;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            background: inherit;
+            font-size: 18px;
+            text-transform: capitalize;
+            color: coral;
+            font-weight: 600;
+            border-color: gray;
+            margin: 5px;
+            cursor: pointer;
+        }
+
+        .output-box {
+            display: flex;
+            align-items: center;
+            justify-content: start;
+            flex-wrap: wrap;
+            background: powderblue;
+            border-radius: 5px;
+        }
+
+        .flex-box {
+            display: flex;
+            align-items: center;
+        }
+
+        .input-box {
+            display: none;
+        }
+
+        .output-item {
+            width: 320px;
+            padding: 10px;
+            background: gainsboro;
+            border-radius: 10px;
+            box-shadow: 5px 3px 10px 3px #0b0b0b;
+            margin: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+
+
+        <div class="container">
+            <div class="">
+                <h1>Flash card</h1>
+                <div class="flex-box">
+                    <button onclick="showCreateCardBox()">New Card</button>
+                    <button onclick="deleteAllFlashCards()">Delete Card</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="container input-box">
+            <div class="flex-box">
+                <i class="fa-solid fa-clipboard-question fa-2xl"></i>
+                <textarea id="qusInput" rows="2" placeholder="your question"></textarea>
+            </div>
+
+            <div class="flex-box">
+                <i class="fa-solid fa-book-open fa-2xl"></i>
+                <textarea id="ansInput" rows="2" placeholder="your answer"></textarea>
+            </div>
+            <div class="flex-box">
+                <button onclick="saveCard()">Save Card</button>
+                <button onclick="cancelCard()">Cancel Card</button>
+            </div>
+        </div>
+
+        <div class="output-box" id="output">
+            <!-- <div class="output-item"></div>
+            <div class="output-item"></div> -->
+        </div>
+
+    </div>
+    <script>
+        const question = document.getElementById('qusInput')
+        const answer = document.getElementById('ansInput')
+        const showCard = document.getElementById('output')
+        const inputBox = document.querySelector('.input-box')
+        // store local storage
+        let contentList = localStorage.getItem('items') ? JSON.parse(localStorage.getItem('items')) : []
+
+
+        function showCreateCardBox() {
+            inputBox.style.display = 'block'
+        }
+
+        function cancelCard() {
+            inputBox.style.display = 'none'
+        }
+
+        // delete all card and empty local storage
+        function deleteAllFlashCards() {
+            localStorage.clear()
+            showCard.innerHTML = ''
+            contentList = []
+        }
+
+        // save user input and update local storage
+        function saveCard() {
+            // make content object
+            let contentBox = {
+                'question': question.value,
+                'answer': answer.value
+            }
+
+            // update content
+            contentList.push(contentBox)
+            localStorage.setItem('items', JSON.stringify(contentList))
+
+            // show content into browser
+            divMaker(contentList[contentList.length - 1]) // contentList array length
+
+            // make input field blank
+            question.value = ''
+            answer.value = ''
+
+        }
+        // check if local storage has data call divMaker
+        contentList.forEach(divMaker) // don't understand
+
+        // make div and insert data
+        function divMaker(data) {
+            let div = document.createElement('div')
+            let h4 = document.createElement('h4')
+            let p = document.createElement('p')
+
+            div.className = 'output-item'
+            h4.setAttribute('style', 'font-size:24px; padding-bottom:10px;  margin:0; border-bottom: 1px solid red')
+            h4.innerHTML = data.question
+            p.setAttribute('style', 'font-size:20px; margin:10px; display:none')
+            p.innerHTML = data.answer
+            div.appendChild(h4)
+            div.appendChild(p)
+
+            // show answer when user double click on question
+            div.addEventListener('click', function(){
+                if(p.style.display == 'none'){
+                    p.style.display = 'block'
+                }else{
+                    p.style.display = 'none'
+                }
+            })
+            showCard.appendChild(div)
+        }
+
+    </script>
+</body>
+
+</html>
