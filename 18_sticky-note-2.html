@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>sticky note</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+    integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        body{
+            background: rgb(209, 76, 36);
+            padding: 20px;
+            text-align: center;
+            position: relative;
+            height: 100vh;
+        }
+        h1{
+            font-size: 60px;
+        }
+        button{
+            font-size: 20px;
+            padding: 10px;
+            background: dodgerblue;
+            color: aliceblue;
+            text-transform: capitalize;
+            cursor: pointer;
+        }
+        .show-note{
+            display: flex;
+            align-items: center;
+            justify-content: start;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin-top: 40px;
+        }
+        .note-item{
+            width: 300px;
+            height: 300px;
+            padding: 10px;
+            box-shadow: 0px 6px 10px -2px #313131;
+        }
+        p{
+            font-size: 20px;
+        }
+        .input-box{
+            width: 250px;
+            height: 200px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            background: white;
+            transform: translate(-50%, -50%);
+            display: none;
+            z-index: 100;
+        }
+        textarea{
+            width: 100%;
+            height: 100%;
+            font-size: 20px;
+            border-color: antiquewhite;
+            border-radius: 10px;
+            outline: 0;
+        }
+        .icon-box{
+            text-align: right;
+            padding: 5px;
+        }
+        i{
+            color: #ddd;
+            cursor: pointer;
+        }
+        i:hover{
+            color: #000;
+        }
+    </style>
+</head>
+<body>
+    <h1>sticky note</h1>
+    <button onclick="showCreateNoteBox()">create note</button>
+    <div class="input-box">
+        <div class="icon-box">
+            <i class="fa-regular fa-circle-check fa-lg" onclick="saveNote()"></i>
+            <i class="fa-regular fa-circle-xmark fa-lg" onclick="cancelInputBox()"></i>
+        </div>
+        <textarea  id="userMsg"  rows="5" placeholder="write note"></textarea>
+    </div>
+    <div class="show-note">
+        <!-- <div class="note-item"></div>
+        <div class="note-item"></div>
+        <div class="note-item"></div>
+        <div class="note-item"></div> -->
+    </div>
+
+    <script>
+        const inputBox = document.getElementsByClassName('input-box')[0]
+        const userMsg = document.getElementById('userMsg')
+        const showNote = document.getElementsByClassName('show-note')[0]
+
+        function saveNote(){
+            let div = document.createElement('div')
+            div.className = 'note-item'
+            // adding style by calling function
+            div.style.margin = margin()
+            div.style.background = color()
+            div.style.transform = rotate()
+
+            div.addEventListener('mouseenter', function(){
+                div.style.transform = 'scale(1.1)'
+            })
+            div.addEventListener('mouseleave', function(){
+                div.style.transform = 'scale(1)'
+                div.style.transform = rotate()
+            })
+            div.addEventListener('dblclick', function(){
+                div.remove()
+            })
+
+            let p =  document.createElement('p')
+
+            p.innerHTML = userMsg.value
+            div.appendChild(p)
+            showNote.insertAdjacentElement("beforeend", div)
+
+            userMsg.value = ''
+        }
+
+        userMsg.addEventListener('keydown', (e)=>{
+            if(e.key === 'Enter')
+            saveNote()
+        })
+
+
+        function margin(){
+            const marginArr = ['-5px', '1px', '5px', '10px', '15px', '20px']
+            return marginArr[Math.floor(Math.random() * marginArr.length)]
+        }
+
+        function rotate(){
+            const rotateArr = ['rotate(3deg)', 'rotate(1deg)', 'rotate(5deg)', 'rotate(10deg)', 'rotate(-1deg)', 'rotate(-10deg)','rotate(-5deg)']
+            return rotateArr[Math.floor(Math.random() * rotateArr.length)]
+        }
+
+        function color(){
+            const colorArr = ['#00ffff', '#8a2be2', '#ffff00', '#d87093', '#dc143c']
+            return colorArr[Math.floor(Math.random() * colorArr.length)]
+        }
+
+        // show
+        function showCreateNoteBox(){
+            if(inputBox.style.display === 'none'){
+                inputBox.style.display = 'block'
+            }else{
+                inputBox.style.display = 'none'
+            }
+        }
+
+        // hide
+        function cancelInputBox(){
+            showCreateNoteBox()
+        }
+    </script>
+</body>
+</html>
