@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>image gallery using API</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+    integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <style>
+        .header{
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        input{
+            max-width: 250px;
+            width: 100%;
+            padding: 10px;
+        }
+        .searchBox{
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .searchBox i{
+            font-size: 30px;
+            cursor: pointer;
+        }
+        .grid{
+            width: 100%;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-evenly;
+            align-items: flex-start;
+        }
+        .img{
+            max-width: 380px;
+            width: 100%;
+            height: 200px;
+            margin-top: 15px;
+            background-position: 50% 50%;
+            background-size: cover;
+            border-radius: 2px solid #ddd;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Image gallery Using Unsplash API</h1>
+        <div class="searchBox">
+            <input type="text" id="userSearch" placeholder="search .....">
+            <i class="fa-solid fa-magnifying-glass fa-lg" onclick="loadImg()"></i>
+        </div>
+        <div class="container">
+            <div class="grid"></div>
+        </div>
+    </div>
+
+    <script>
+        const inputSearch = document.getElementById('userSearch')
+        const outputBox = document.getElementsByClassName('grid')[0]
+
+        inputSearch.addEventListener('keydown', function(e){
+            if(e.key === 'Enter')
+            loadImg()
+        })
+
+        function loadImg(){
+            removeImages() // remover all existing image
+
+            const url = '' // put your url here . I have no unsplash link
+            fetch(url)
+            .then(response => {
+                if(response.ok){
+                    return response.json()
+                }
+                else{
+                    console.log(response.status);
+                }
+            })
+            .then(data => {
+                const imageNode = []
+                for(let i = 0; i<data.results.length; i++){
+                    imageNode[i] = document.createElement('div')
+                    imageNode[i].className = 'img'
+                    imageNode[i].style.backgroundImage = 'url('+ data.results[i].links.download + ')'
+                    imageNode[i].addEventListener('dblclick', function(){
+                        window.open(data.results[i].links.download, '_blank')
+                    })
+                    outputBox.appendChild(imageNode[i])
+                }
+            })
+        }
+        function removeImages(){
+            grid.innerHTML = ''
+        }
+    </script>
+</body>
+</html>

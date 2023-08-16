@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Math quiz </title>
+    <style>
+        .container{
+            max-width: 1440px;
+            width: 100%;
+            margin: auto;
+            padding: 20px;
+        }
+        header{
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: salmon;
+            color: aliceblue;
+            padding: 0 20px;
+        }
+        h1{
+            font-size: 3.5rem;
+        }
+        .title{
+            color: blueviolet;
+        }
+        Ul{
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            list-style: none;
+        }
+        li a{
+            font-size: 1.5rem;
+            text-decoration: none;
+            color: aliceblue;
+        }
+        li a:hover{
+            color: brown;
+        }
+        .math-body{
+            display: flex;
+            align-items: stretch;
+            justify-content: space-between;
+        }
+        .question{
+            background: khaki;
+            width: 100%;
+            display: flex;
+            gap: 50px;
+            padding: 60px 30px;
+            justify-content: center;
+        }
+        .answer h1{
+            background: slateblue;
+            min-width: 150px;
+            text-align: center;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1 class="title">Unlimited Math quiz</h1>
+            <h1>summation</h1>
+            <ul>
+                <li><a href="summation.html">Summation</a></li>
+                <li><a href="subtraction.html">Subtraction</a></li>
+                <li><a href="multiplication.html">Multiplication</a></li>
+                <li><a href="division.html">Division</a></li>
+            </ul>
+        </header>
+        <div class="math-body">
+            <div class="question">
+                <h1 class="fNumber"> 10 </h1>
+                <h1> + </h1>
+                <h1 class="lNumber">5</h1>
+                <h1> = </h1>
+                <h1> ? </h1>
+            </div>
+            <div class="answer">
+                <h1 class="fAnswer"> 10 </h1>
+                <h1 class="sAnswer">5</h1>
+                <h1 class="lAnswer">5</h1>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        
+        const fNumber = document.getElementsByClassName('fNumber')[0]
+        const lNumber = document.getElementsByClassName('lNumber')[0]
+        const answer1 = document.getElementsByClassName('fAnswer')[0]
+        const answer2 = document.getElementsByClassName('sAnswer')[0]
+        const answer3 = document.getElementsByClassName('lAnswer')[0]
+        // const audio = document.getElementById('audio')
+        let answer = 0
+
+        generateEquation()
+        function generateEquation(){
+
+            // generate random number
+            // first 2 for showing in question
+            let num1 = Math.floor(Math.random() * 100)
+            let num2 = Math.floor(Math.random() * 100)
+            // last 2 for showing answer sheet
+            let ans1 = Math.floor(Math.random() * 100)
+            let ans2 = Math.floor(Math.random() * 100)
+
+            // calculate answer
+            answer = num1 + num2
+            
+            // show number in browser
+            // question
+            fNumber.innerHTML = num1
+            lNumber.innerHTML = num2
+
+            //swap answer
+            let allAnswers = [answer, ans1, ans2]
+            let switchAnswer = []
+            for(i = allAnswers.length; i--;){ 
+                switchAnswer.push(allAnswers.splice(Math.floor(Math.random() * (i + 1)),1)[0])
+                //it is complicated push method, 
+            }
+
+            // answer
+            // answer1.innerHTML = answer
+            // answer2.innerHTML = ans1
+            // answer3.innerHTML = ans2
+            answer1.innerHTML = switchAnswer[0]
+            answer2.innerHTML = switchAnswer[1]
+            answer3.innerHTML = switchAnswer[2]
+        }
+
+        answer1.addEventListener('click', function(){
+            if (answer1.innerHTML == answer ) {
+                generateEquation()
+            }else{
+                // audio.play()
+            }
+        })
+
+        answer2.addEventListener('click', function(){
+            if (answer2.innerHTML == answer ) {
+                generateEquation()
+            }else{
+                // audio.play()
+            }
+        })
+
+        answer3.addEventListener('click', function(){
+            if (answer3.innerHTML == answer ) {
+                generateEquation()
+            }else{
+                // audio.play()
+            }
+        })
+
+    </script>
+</body>
+</html>
